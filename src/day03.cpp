@@ -47,34 +47,18 @@ namespace day03
             };
             it--;
 
+            string intersection = group[0];
+            sort(intersection.begin(), intersection.end());
             for (auto &rucksack : group)
             {
-                map<char, int> rucksackCounts;
-                for (auto &item : rucksack)
-                {
-                    if (!rucksackCounts.contains(item))
-                    {
-                        rucksackCounts[item] = 1;
-                        if (groupCounts.contains(item))
-                        {
-                            groupCounts[item] = groupCounts[item] + 1;
-                        }
-                        else
-                        {
-                            groupCounts[item] = 1;
-                        }
-                    }
-                }
+                sort(rucksack.begin(), rucksack.end());
+                string tmp;
+                set_intersection(rucksack.begin(), rucksack.end(),
+                                 intersection.begin(), intersection.end(),
+                                 inserter(tmp, tmp.begin()));
+                intersection = tmp;
             }
-
-            for (auto pair : groupCounts)
-            {
-                if (pair.second == 3)
-                {
-                    char c = pair.first;
-                    sharedCharsPerGroup.push_back(c);
-                }
-            }
+            sharedCharsPerGroup.push_back(intersection[0]);
         }
         return sharedCharsPerGroup;
     }
