@@ -1,36 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-#include <map>
 #include <vector>
-#include <optional>
+#include <numeric>
 #include "aoc.cpp"
 
 using namespace std;
 
 namespace day03
 {
-    optional<char> findSharedChar(string &rucksack)
+    char findSharedChar(string &rucksack)
     {
-        set<char> leftHalf, rightHalf;
-        size_t i = 0;
-        size_t k = rucksack.length() / 2;
-
-        for (; i < rucksack.length() / 2; i++, k++)
-        {
-            leftHalf.insert(rucksack.at(i));
-            rightHalf.insert(rucksack.at(k));
-        }
-
-        for (auto c : leftHalf)
-        {
-            if (rightHalf.contains(c))
-            {
-                return c;
-            }
-        }
-
-        return nullopt;
+        set<char> leftHalf = set(rucksack.cbegin(), rucksack.cend() - (rucksack.length() / 2));
+        return *std::find_if(rucksack.cbegin() + (rucksack.length() / 2), rucksack.cend(), [&leftHalf](auto c)
+                             { return leftHalf.contains(c); });
     }
 
     vector<char> findSharedCharsPerGroup(vector<string> lines, int groupSize)
@@ -38,7 +21,6 @@ namespace day03
         vector<char> sharedCharsPerGroup;
         for (auto it = lines.begin(); it != lines.end(); it++)
         {
-            map<char, int> groupCounts;
             vector<string> group;
 
             for (int i = 0; i < groupSize; i++)
@@ -72,17 +54,10 @@ namespace day03
             lines.push_back(line);
         }
 
-        int prioritySumP1 = 0;
-        for (auto &line : lines)
-        {
-            optional<char> c = findSharedChar(line);
-            if (c.has_value())
-            {
-                char value = c.value();
-                int priority = (value - (value < 97 ? 64 - 26 : 96));
-                prioritySumP1 += priority;
-            }
-        }
+        int prioritySumP1 = accumulate(lines.begin(), lines.end(), 0, [](int acc, string line)
+                                       { 
+            char value = findSharedChar(line);
+            return acc +  (value - (value < 97 ? 64 - 26 : 96)); });
         assert(prioritySumP1 == 7903);
 
         int prioritySumP2 = 0;
