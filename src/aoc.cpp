@@ -18,7 +18,6 @@ namespace aoc
         }
         return out;
     }
-
 }
 
 #endif
