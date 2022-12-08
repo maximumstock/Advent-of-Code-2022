@@ -6,11 +6,18 @@ using namespace std;
 
 namespace aoc
 {
-    vector<int> test()
+    vector<string> split_string(string input, char delim)
     {
-        vector<int> a;
-        return a;
+        vector<string> out;
+        string s;
+        istringstream iss(input);
+        while (getline(iss, s, delim))
+        {
+            out.push_back(s);
+        }
+        return out;
     }
+
 }
 
 #endif

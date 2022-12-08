@@ -9,19 +9,6 @@ using namespace std;
 
 namespace day05
 {
-
-    vector<string> split_string(string input, char delim)
-    {
-        vector<string> out;
-        string s;
-        istringstream iss(input);
-        while (getline(iss, s, delim))
-        {
-            out.push_back(s);
-        }
-        return out;
-    }
-
     string crane(vector<array<uint32_t, 3>> instructions, vector<stack<char>> stacks, bool keepOrder)
     {
         for (auto i : instructions)
@@ -30,6 +17,8 @@ namespace day05
             size_t from = max(i[1] - 1, (uint32_t)0);
             size_t to = max(i[2] - 1, (uint32_t)0);
 
+            // For some reason I wasn't able to minimize these two branches by juggling references
+            // to the respective source/target stacks per path - might have to take a look at it again.
             if (keepOrder)
             {
                 stack<char> tmp;
@@ -106,7 +95,7 @@ namespace day05
 
         for (string line; getline(infile, line);)
         {
-            auto tokens = split_string(line, ' ');
+            auto tokens = aoc::split_string(line, ' ');
             instructions.push_back(array<uint32_t, 3>{(uint32_t)stoi(tokens.at(1)), (uint32_t)stoi(tokens.at(3)), (uint32_t)stoi(tokens.at(5))});
         }
 
