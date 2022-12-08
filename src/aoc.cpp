@@ -2,6 +2,7 @@
 #define AOC_H
 
 #include <vector>
+#include <sstream>
 using namespace std;
 
 namespace aoc
