@@ -10,7 +10,6 @@ using namespace std;
 
 namespace day08
 {
-
     void solve()
     {
         ifstream infile("inputs/day07.txt");
