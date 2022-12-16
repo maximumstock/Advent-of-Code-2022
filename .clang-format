@@ -7,3 +7,4 @@ IndentWidth: 4
 AllowShortIfStatementsOnASingleLine: false
 ColumnLimit: 0
 NamespaceIndentation: All
+SpaceBeforeCpp11BracedList: true

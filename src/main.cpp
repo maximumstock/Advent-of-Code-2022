@@ -8,6 +8,7 @@
 #include "day08.cpp"
 #include "day09.cpp"
 #include "day10.cpp"
+#include "day11.cpp"
 
 int main() {
     day01::solve();
@@ -18,5 +19,6 @@ int main() {
     day07::solve();
     day08::solve();
     day10::solve();
+    day11::solve();
     return 0;
 }
