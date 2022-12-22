@@ -5,6 +5,6 @@ BasedOnStyle:    LLVM
 UseTab: Never
 IndentWidth: 4
 AllowShortIfStatementsOnASingleLine: false
-ColumnLimit: 0
+ColumnLimit: 120
 NamespaceIndentation: All
 SpaceBeforeCpp11BracedList: true
