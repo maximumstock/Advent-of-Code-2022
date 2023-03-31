@@ -34,7 +34,7 @@ namespace day11 {
 
         const uint64_t mod = 19 * 13 * 5 * 7 * 17 * 2 * 3 * 11;
         const int MONKEYS = 8;
-        long inspections[MONKEYS] = {0};
+        uint64_t inspections[MONKEYS] = {0};
 
         for (int round = 0; round < rounds; round++) {
             for (int i = 0; i < MONKEYS; i++) {

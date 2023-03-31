@@ -19,7 +19,7 @@ namespace aoc {
     vector<string> split_string2(string input, string delim) {
         vector<string> out;
         string s;
-        int i = 0;
+        uint64_t i = 0;
         while (i < input.length()) {
             if (input.substr(i).starts_with(delim)) {
                 out.push_back(input.substr(0, i));

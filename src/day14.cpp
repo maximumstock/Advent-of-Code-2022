@@ -17,7 +17,7 @@ namespace day14 {
 
         for (string line; getline(infile, line);) {
             vector<string> coords = aoc::split_string2(line, " -> ");
-            for (int i = 0; i < coords.size() - 1; i++) {
+            for (uint32_t i = 0; i < coords.size() - 1; i++) {
                 auto start = aoc::split_string(coords[i], ',');
                 auto end = aoc::split_string(coords[i + 1], ',');
                 auto start_x = stoi(start[0]);
