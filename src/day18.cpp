@@ -1,6 +1,7 @@
 #include "aoc.cpp"
 #include <fstream>
 #include <iostream>
+#include <numeric>
 #include <set>
 #include <tuple>
 #include <vector>
@@ -189,8 +190,8 @@ namespace day18 {
         //      - start a BFS from node in all 6 directions
         //      - take note of each node traversed this way
         //      - for each node, sum the number of sides that these empty nodes share with neighbouring droplet nodes
-        int inner_surface = 0;
         set<tuple<int, int, int>> traversed {};
+        std::vector<Pocket> pockets = {};
 
         for (int x = min_x; x <= max_x; x++) {
             for (int y = min_y; y <= max_y; y++) {
@@ -199,26 +200,20 @@ namespace day18 {
                     if (grid.contains(tuple) || traversed.contains(tuple)) {
                         continue;
                     }
-                    // cout << x << "-" << y << "-" << z << endl;
-                    if (is_pocket(grid, tuple, min_x, max_x, min_y, max_y, min_z, max_z)) {
 
+                    if (is_pocket(grid, tuple, min_x, max_x, min_y, max_y, min_z, max_z)) {
                         auto pocket =
                             calculate_pocket_surface(grid, traversed, min_x, max_x, min_y, max_y, min_z, max_z, tuple);
-                        if (pocket.size < 2000) {
-                            std::cout << "Found pocket with surface " << pocket.surface << endl;
-                            std::cout << "Pocket with size: " << pocket.size << endl;
-                            inner_surface += pocket.surface;
-                        }
+                        pockets.push_back(pocket);
                     }
                 }
             }
         }
 
-        // std::cout << traversed.size() << endl;
-
-        // std::cout << "Total Surface " << total_surface << endl;
-        // std::cout << "Inner Surface " << inner_surface << endl;
-        // std::cout << "Exterior Surface " << total_surface - inner_surface << endl;
+        std::sort(pockets.begin(), pockets.end(),
+                  [](const Pocket &a, const Pocket &b) -> bool { return a.size > b.size; });
+        auto lambda = [&](int sum, Pocket p) { return sum + p.surface; };
+        int inner_surface = std::accumulate(pockets.begin() + 1, pockets.end(), 0, lambda); // skip largest pocket
 
         assert(total_surface == 3522);
         assert(total_surface - inner_surface == 2074);
