@@ -40,3 +40,4 @@ bin
 .vscode
 Makefile
 .cache
+_deps
