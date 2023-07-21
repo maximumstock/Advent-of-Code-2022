@@ -12,6 +12,8 @@
 #include "day12.cpp"
 #include "day14.cpp"
 #include "day18.cpp"
+#include "day19.cpp"
+#include <dbg.h>
 
 int main() {
     day01::solve();
@@ -26,5 +28,6 @@ int main() {
     day12::solve();
     day14::solve();
     day18::solve();
+    day19::solve();
     return 0;
 }
